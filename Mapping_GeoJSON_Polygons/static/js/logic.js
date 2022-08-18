@@ -5,14 +5,14 @@ console.log('working');
 // let map = L.map('mapid').setView([30, 30], 2);
 
 // We create the tile layer that will be the background of our map.
-let light = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/navigation-day-v1/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+let streets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     accessToken: API_KEY
 });
 
 // We create the dark view tile layer that will be an option for our map.
-let dark = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/navigation-night-v1/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+let satelliteStreets = L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token={accessToken}', {
 attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery (c) <a href="https://www.mapbox.com/">Mapbox</a>',
     maxZoom: 18,
     accessToken: API_KEY
@@ -20,39 +20,40 @@ attribution: 'Map data © <a href="https://www.openstreetmap.org/">OpenStreetMap
 
 // create base layer that holds both tileLayers
 let baseMaps = {
-  Day_Navigation: light,
-  Night_Navitation: dark
+  Streets: streets,
+  Satellite_Streets: satelliteStreets
 }
 
 // create the map object with center, zoom and default layer
 let map = L.map('mapid', {
-  center: [44.0,-80.0],
-  zoom: 2,
-  layers: [dark]
+  center: [43.7,-79.3],
+  zoom: 11,
+  layers: [streets]
 })
 
 // pass our map layers to layers control and add layer control to the map
 L.control.layers(baseMaps).addTo(map);
 
-// Accessing the toronto data url
+// Accessing the toronto neighborhood url
 // because the dataset is large, move code after tileLayer so the map loads first
-let torontoData = 'https://raw.githubusercontent.com/lnshewmo/Mapping-Earthquakes/main/static/js/torontoRoutes.json';
+let torontoHoods = 'https://raw.githubusercontent.com/lnshewmo/Mapping-Earthquakes/main/static/js/torontoNeighborhoods.json';
 
 // store line style
 let myStyle = {
-    color: 'lightyellow',
-    weight: 2
+    color: 'aqua',
+    weight: 1,
+    fillColor: 'lightpink'
 }
 
 // grab the geoJSON data 
-d3.json(torontoData).then(function(data) {
+d3.json(torontoHoods).then(function(data) {
     console.log(data);
   // Create a GeoJSON layer with the retrieved data.
   L.geoJSON(data,{
     style: myStyle,
     onEachFeature: function(feature, layer) {
       console.log(layer);
-      layer.bindPopup('<h2>Airline: ' + feature.properties.airline + '</h2> <hr> <h3>Destination: ' + feature.properties.dst+ '</h3>');
+      layer.bindPopup('<h4>Neighborhood: ' + feature.properties.AREA_NAME+ '</h4>');
     }
   }).addTo(map);
 });
