@@ -38,13 +38,18 @@ L.control.layers(baseMaps).addTo(map);
 // because the dataset is large, move code after tileLayer so the map loads first
 let torontoData = 'https://raw.githubusercontent.com/lnshewmo/Mapping-Earthquakes/main/static/js/torontoRoutes.json';
 
+// store line style
+let myStyle = {
+    color: 'lightyellow',
+    weight: 2
+}
+
 // grab the geoJSON data 
 d3.json(torontoData).then(function(data) {
     console.log(data);
   // Create a GeoJSON layer with the retrieved data.
   L.geoJSON(data,{
-    color: 'lightyellow',
-    lineweight: 1,
+    style: myStyle,
     onEachFeature: function(feature, layer) {
       console.log(layer);
       layer.bindPopup('<h2>Airline: ' + feature.properties.airline + '</h2> <hr> <h3>Destination: ' + feature.properties.dst+ '</h3>');
