@@ -43,13 +43,33 @@ function styleInfo(feature) {
     return {
       opacity: 1,
       fillOpacity: 1,
-      fillColor: "#ffae42",
+      fillColor: getColor(feature.properties.mag),
       color: "#000000",
       radius: getRadius(feature.properties.mag),
       stroke: true,
       weight: 0.5
     };
   }
+
+// fx to set fill color of circleMarker based on magnitude
+function getColor(magnitude) {
+    if (magnitude>5){
+        return '#ea2c2c';
+    }
+    if (magnitude>4){
+        return '#ea822c';
+    }
+    if (magnitude>3){
+        return '#ee9c00';
+    }
+    if (magnitude>2){
+        return '#eecc00';
+    }
+    if (magnitude>1){
+        return '#d4ee00';
+    }
+    return '#98ee00';
+};  
 
 // fx using magnitude to determine radius of marker
 // Equakes magnitude 0 will be radius =1
@@ -72,6 +92,10 @@ d3.json('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.geoj
         return L.circleMarker(latlng);
         },
     // We set the style for each circleMarker using our styleInfo function.
-    style: styleInfo
+    style: styleInfo,
+    // create a popup to display info at each marker
+    onEachFeature: function(feature, layer) {
+        layer.bindPopup("Magnitude: " + feature.properties.mag + "<br>Location: " + feature.properties.place);
+        }
     }).addTo(map);
 });
