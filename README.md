@@ -6,8 +6,8 @@
 GeoJSON data is pulled from the USGS earthquake [website](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) and populated onto a Mapbox-generated base map using JavaScript and the D3 library.  An API request to Mapbox obtains the base map and satellite layers, and Leaflet methods are used to create the interactive layers, overlays and popups.  The popup markers can be clicked to obtain location and magnitude information, and are also colored (refer to the legend) and sized to reflect earthquake magnitude.  By toggling layers and overlays, multiple visualizations are possible.  The map is rendered on a local server.
 
 #### Map Layers: Street, Satellite, Ocean
-
 #### Overlays: All Earthquakes, Tectonic Plates, Major Earthquakes (only)
+![controls](/Earthquake_Challenge/static/leaflet_controls.png)
 
 This map is showing a street view with tectonic plates and all earthquakes.
 ![map](/Earthquake_Challenge/static/map.png)
