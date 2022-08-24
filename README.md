@@ -1,23 +1,19 @@
 # Mapping-Earthquakes
-### Using Javascript, D3, Mapbox and Leaflet to create an interactive map of GeoJSON earthquake data
+### Using Javascript, D3, Mapbox and Leaflet to create an interactive map of US Geological Survey (USGS) GeoJSON earthquake data
 
-### Overview
-Disaster Reporting Network
+## Overview
 
-An interactive map showing tectonic plates, and location and magnitude of earthquakes was created by obtaining GeoJSON data from 
-Using Javascript and D3 library, GeoJSON data on global earthquakes was retrived using an API 
+GeoJSON data is pulled from the USGS earthquake [website](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) and populated onto a Mapbox-generated base map using JavaScript and the D3 library.  An API request to Mapbox obtains the base map and satellite layers, and Leaflet methods are used to create the interactive layers, overlays and popups.  The popup markers can be clicked to obtain location and magnitude information, and are also colored (refer to the legend) and sized to reflect earthquake magnitude.  By toggling layers and overlays, multiple visualizations are possible.  The map is rendered on a local server.
 
-Leaflet library - overlays
-Mapbox API request to obtain the base map.
+#### Map Layers: Street, Satellite, Ocean
 
-Retrieve GeoJSON data from USGS website - coordinates and mag of earthquakes for last 7 days
-Make API requests to Mapbox server to obtain the base maps.
-Populate geographical maps with GeoJSON data using JavaScript and the Data-Driven Documents (D3) library.
-Add multiple map layers to geographical maps using Leaflet control plugins to add user interface controls.
-Use JavaScript ES6 functions to add GeoJSON data, features, and interactivity to maps.
-Render maps on a local server.
+#### Overlays: All Earthquakes, Tectonic Plates, Major Earthquakes (only)
 
-interactive features:
-overlays - mapbox and leaflet
-Pop up marker - location and mag
-Size and color - visulization of magnitude
+This map is showing a street view with tectonic plates and all earthquakes.
+![map](/Earthquake_Challenge/static/map.png)
+
+This map is showing the ocean terrain and location of only the major earthquakes (>4.5 magnitude).
+![map](/Earthquake_Challenge/static/ocean_overlay.png)
+
+
+To render the data visualization, a valid API token for Mapbox is required.  The files are located in the Earthquake_Challenge folder.
