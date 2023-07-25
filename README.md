@@ -16,4 +16,4 @@ This map is showing the ocean terrain and location of only the major earthquakes
 ![map](/Earthquake_Challenge/static/ocean_overlay.png)
 
 
-To render the data visualization, a valid API token for Mapbox is required.  The files are located in the Earthquake_Challenge folder.
+To render the data visualization, a valid API token for Mapbox is needed, which requires you create an account ([here](https://account.mapbox.com/auth/signup/?route-to=%22https%3A%2F%2Faccount.mapbox.com%2F%22)).  Assign the token to a variable `API_KEY` and save to a `config.js` file in the same directory as the `challenge_logic.js` file.  The files are located in the Earthquake_Challenge folder.
